@@ -23,7 +23,7 @@ func check(name string, duration time.Duration) {
 			continue
 		}
 		if r.Rcode != dns.RcodeSuccess {
-			fmt.Printf("count#dns-canary.error=1 name=%q r=%q", name, err, r)
+			fmt.Printf("count#dns-canary.error=1 name=%q r=%q\n", name, err, r)
 			continue
 		}
 
