@@ -36,7 +36,7 @@ func main() {
 	if namesEnv == "" {
 		panic("missing $NAMES")
 	}
-	names := strings.Split(namesEnv, ":")
+	names := strings.Split(namesEnv, ",")
 
 	intervalEnv := os.Getenv("INTERVAL")
 	if intervalEnv == "" {
