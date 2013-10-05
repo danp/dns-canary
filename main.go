@@ -28,6 +28,7 @@ func check(name string, duration time.Duration) {
 		}
 
 		fmt.Printf("count#dns-canary.success=1 name=%q r=%q\n", name, r)
+		fmt.Printf("count#dns-canary.error=0\n")
 	}
 }
 
