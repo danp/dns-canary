@@ -1,0 +1,10 @@
+{
+	"ImportPath": "github.com/dpiddy/dns-canary",
+	"GoVersion": "go version devel +f4d1cb8d9a91 Thu Sep 19 22:34:33 2013 +1000 darwin/amd64",
+	"Deps": [
+		{
+			"ImportPath": "github.com/miekg/dns",
+			"Rev": "af4ef472c049c91f7230a2af08906aebf7369be6"
+		}
+	]
+}
