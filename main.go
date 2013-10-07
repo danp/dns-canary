@@ -9,15 +9,14 @@ import (
 	"github.com/miekg/dns"
 )
 
-func check(name string, duration time.Duration) {
-	config, _ := dns.ClientConfigFromFile("/etc/resolv.conf")
+func check(name, server string, duration time.Duration) {
 	c := new(dns.Client)
 	m := new(dns.Msg)
 	m.SetQuestion(dns.Fqdn(name), dns.TypeA)
 	m.RecursionDesired = true
 
 	for _ = range time.Tick(duration) {
-		r, _, err := c.Exchange(m, config.Servers[0]+":"+config.Port)
+		r, _, err := c.Exchange(m, server)
 		if err != nil {
 			fmt.Printf("count#dns-canary.error=1 name=%q error=%q r=%q\n", name, err, r)
 			continue
@@ -46,9 +45,14 @@ func main() {
 	if err != nil {
 		panic("can't parse $DURATION")
 	}
+	server := os.Getenv("SERVER")
+	if server == "" {
+		config, _ := dns.ClientConfigFromFile("/etc/resolv.conf")
+		server = config.Servers[0] + ":" + config.Port
+	}
 
 	for _, name := range names {
-		go check(name, interval)
+		go check(name, server, interval)
 	}
 
 	select {}
