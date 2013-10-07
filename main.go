@@ -16,6 +16,8 @@ func check(name, server string, duration time.Duration) {
 	m.RecursionDesired = true
 
 	for _ = range time.Tick(duration) {
+		m.Id = dns.Id()
+
 		r, _, err := c.Exchange(m, server)
 		if err != nil {
 			fmt.Printf("count#dns-canary.error=1 name=%q error=%q r=%q\n", name, err, r)
